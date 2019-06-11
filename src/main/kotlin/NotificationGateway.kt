@@ -12,6 +12,9 @@ fun main(args: Array<String>) {
     embeddedServer(Netty, 8080) {
         routing {
 
+            get("/") {
+                call.respondText("{\"success\" : true }", ContentType.Application.Json)
+            }
             post("notifyUsers") {
                 val text = call.receiveText()
                 call.respondText("{\"success\" : true }", ContentType.Application.Json)

@@ -1,50 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d0489f83-179f-4892-a388-8c4a944ce6fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/UsersNotifications$notifyUsers$1$server$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/UsersNotifications.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/UsersNotifications.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/build-history.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/UsersNotifications.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/UsersNotifications.kt" afterDir="false" />
-    </list>
+    <list default="true" id="d0489f83-179f-4892-a388-8c4a944ce6fc" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -67,6 +24,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -83,20 +43,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+            <state relative-caret-position="476">
+              <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/NotificationGateway.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -154,6 +114,17 @@
             <path>
               <item name="notification" type="b2602c69:ProjectViewProjectNode" />
               <item name="r-sports-notification-service" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="notification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="r-sports-notification-service" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="gradle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="notification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="r-sports-notification-service" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="gradle" type="462c0819:PsiDirectoryNode" />
+              <item name="wrapper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="notification" type="b2602c69:ProjectViewProjectNode" />
@@ -268,7 +239,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16577825" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -279,15 +249,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3290461" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3290461" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39978564" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3290461" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Build" order="10" weight="0.32953367" />
+      <window_info anchor="bottom" id="Build" order="10" weight="0.3290461" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24973376" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -316,13 +286,6 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.relayrides/pushy/0.9.3/18519721376191cc83bd470cc9ccad83b62bb2c9/pushy-0.9.3-sources.jar!/com/relayrides/pushy/apns/ApnsPushNotification.java" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.relayrides/pushy/0.9.3/18519721376191cc83bd470cc9ccad83b62bb2c9/pushy-0.9.3-sources.jar!/com/relayrides/pushy/apns/ApnsClient.java" />
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/UsersNotifications.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -336,7 +299,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/NotificationGateway.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
         </state>
       </provider>
     </entry>
