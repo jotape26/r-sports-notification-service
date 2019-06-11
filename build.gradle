@@ -19,6 +19,8 @@ kotlin {
 dependencies {
     implementation 'com.google.firebase:firebase-admin:6.8.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile group: 'io.undertow', name: 'undertow-core', version: '2.0.21.Final'
+    compile group: 'com.relayrides', name: 'pushy', version: '0.9.3'
     compile "io.ktor:ktor-server-netty:1.2.0"
     compile group: 'io.ktor', name: 'ktor-client', version: '1.2.1'
     implementation "io.ktor:ktor-client-json:1.2.0"
