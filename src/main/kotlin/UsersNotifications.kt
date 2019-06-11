@@ -4,14 +4,8 @@ import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.firestore.DocumentReference
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
-import io.undertow.Undertow
-import io.undertow.client.UndertowClient
-import io.undertow.server.HttpHandler
-import io.undertow.util.HttpString
-import com.relayrides.pushy.apns.ApnsClientBuilder
-import com.relayrides.pushy.apns.ApnsClient.DEVELOPMENT_APNS_HOST
-import com.relayrides.pushy.apns.ApnsClient
-import java.io.File
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.MulticastMessage
 
 
 @Suppress("UNCHECKED_CAST")
@@ -31,31 +25,18 @@ class UsersNotifications {
 
         val jogs = name?.get("jogadores") as ArrayList<Any>
 
+        var tokens = ArrayList<String>()
+
         jogs.forEach {
             val test = it as Map<String, Any>
             val user = test["user"] as DocumentReference
-            val username = user.get().get().getString("userNotificationToken")
-            print(username)
-
-            val server = Undertow.builder()
-                .addHttpListener(443, "api.sandbox.push.apple.com")
-                .setHandler(HttpHandler { exchange ->
-                    exchange.requestHeaders.put(HttpString("path"), "/3/device/" + username)
-                    exchange.requestHeaders.put(HttpString("apns-push-type"), "alert")
-                    exchange.requestMethod = HttpString("POST")
-                    exchange.connection.pushResource("api.sandbox.push.apple.com", HttpString("POST"), exchange.requestHeaders)
-
-                }).build()
-
-            server.start()
-
+            val notificationToken = user.get().get().getString("userNotificationToken")
+            checkNotNull(notificationToken)
+            tokens.add(notificationToken)
         }
 
-        val apnsClient = ApnsClientBuilder()
-            .setClientCredentials(File("src/RSports_Push_Sandbox.p12"), "xxxx")
-            .build()
+        var message = MulticastMessage.builder().addAllTokens(tokens).putData("Hi man", "alert").build()
 
-//        apnsClient.sendNotification()
-
+        FirebaseMessaging.getInstance().sendMulticast(message)
     }
 }
