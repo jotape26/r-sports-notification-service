@@ -2,8 +2,7 @@ package com.jpapps.notification
 
 import com.google.cloud.firestore.DocumentReference
 import com.google.firebase.cloud.FirestoreClient
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.MulticastMessage
+import com.google.firebase.messaging.*
 
 
 @Suppress("UNCHECKED_CAST")
@@ -21,10 +20,16 @@ class UsersNotifications {
             val notificationToken = user.get().get().getString("userNotificationToken")
             checkNotNull(notificationToken)
             tokens.add(notificationToken)
+
+            var notification = Notification(, )
+            var alert = ApsAlert.builder().setBody("This push is coming from Heroku and sending to firebase").setTitle("Heroku Push").build()
+            var aps = Aps.builder().setAlert(alert).build()
+            var apns = ApnsConfig.builder().setAps(aps).build()
+            var message = Message.builder().setApnsConfig(apns).build()
+            FirebaseMessaging.getInstance().send(message)
         }
 
-        var message = MulticastMessage.builder().addAllTokens(tokens).putData("Hi man", "alert").build()
-
-        FirebaseMessaging.getInstance().sendMulticast(message)
+//        var message = MulticastMessage.builder().addAllTokens(tokens).putData("Hi man", "alert").build()
+//        FirebaseMessaging.getInstance().sendMulticast(message)
     }
 }
