@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0489f83-179f-4892-a388-8c4a944ce6fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/jpapps/Test.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/jpapps/Test.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/jpapps/notification/UsersNotifications.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/jpapps/notification/UsersNotifications.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/jpapps/NotificationGateway.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/jpapps/NotificationGateway.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -56,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/NotificationGateway.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+            <state relative-caret-position="574">
+              <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
               <folding>
                 <element signature="e#20#522#0" expanded="true" />
               </folding>
@@ -71,23 +69,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/notification/UsersNotifications.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="493">
+              <caret line="29" column="43" lean-forward="true" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
               <folding>
-                <element signature="e#33#206#0" expanded="true" />
+                <element signature="e#33#240#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/Test.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="272">
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding>
                 <element signature="e#20#291#0" expanded="true" />
-                <marker date="1560304351925" expanded="true" signature="524:1294" ph="..." />
+                <marker date="1560304431203" expanded="true" signature="513:1283" ph="..." />
               </folding>
             </state>
           </provider>
@@ -113,9 +111,9 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/NotificationGateway.kt" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/jpapps/NotificationGateway.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/jpapps/notification/UsersNotifications.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/jpapps/Test.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/jpapps/notification/UsersNotifications.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/jpapps/NotificationGateway.kt" />
       </list>
     </option>
   </component>
@@ -323,7 +321,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16577825" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -334,12 +331,12 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3290461" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3290461" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39978564" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3290461" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.22400858" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.22400858" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3290461" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.3290461" />
@@ -398,33 +395,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/NotificationGateway.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/Test.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding>
-            <element signature="e#20#522#0" expanded="true" />
+            <element signature="e#20#291#0" expanded="true" />
+            <marker date="1560304431203" expanded="true" signature="513:1283" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/notification/UsersNotifications.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="493">
+          <caret line="29" column="43" lean-forward="true" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
           <folding>
-            <element signature="e#33#206#0" expanded="true" />
+            <element signature="e#33#240#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/Test.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/jpapps/NotificationGateway.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        <state relative-caret-position="574">
+          <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
           <folding>
-            <element signature="e#20#291#0" expanded="true" />
-            <marker date="1560304351925" expanded="true" signature="524:1294" ph="..." />
+            <element signature="e#20#522#0" expanded="true" />
           </folding>
         </state>
       </provider>

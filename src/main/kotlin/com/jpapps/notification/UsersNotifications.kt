@@ -5,13 +5,15 @@ import com.google.cloud.firestore.DocumentReference
 import com.google.firebase.cloud.FirestoreClient
 import com.google.firebase.messaging.*
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Suppress("UNCHECKED_CAST")
 class UsersNotifications {
     fun notifyUsers(reservaID: String){
         val name = FirestoreClient.getFirestore().collection("reservas").document(reservaID).get().get().data
         val jogs = name?.get("jogadores") as ArrayList<Any>
-        val date = name.get("dataHora") as Timestamp
+        val date = name.get("dataHora") as Date
 
         val formatter = SimpleDateFormat("dd/MM")
         val tokens = ArrayList<String>()
@@ -32,7 +34,7 @@ class UsersNotifications {
 
         }
 
-        val alert = ApsAlert.builder().setBody(invitationName.trim() + " convidou você para uma partida de futebol no dia " + formatter.format(date.toDate()) + ". E ai, topa?").setTitle("Partiu jogar?").build()
+        val alert = ApsAlert.builder().setBody(invitationName.trim() + " convidou você para uma partida de futebol no dia " + formatter.format(date) + ". E ai, topa?").setTitle("Partiu jogar?").build()
 
         val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
         FirebaseMessaging.getInstance().sendMulticast(message)
