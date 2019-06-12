@@ -19,6 +19,7 @@ import java.lang.Exception
 fun main(args: Array<String>) {
     System.setProperty("Dio.netty.tryReflectionSetAccessible", "true")
 
+    configureFirebase()
     val port = System.getenv("PORT")?.toInt() ?: 8080
     embeddedServer(Netty, port) {
         routing {
@@ -40,15 +41,14 @@ fun main(args: Array<String>) {
             }
         }
     }.start(wait = true)
+}
 
-    fun configureFirebase(){
-        val serviceAccount = FileInputStream("src/r-sports-backend-firebase-adminsdk-t7d2b-e1908f0145.json")
-        val options = FirebaseOptions.Builder()
-            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-            .setDatabaseUrl("https://r-sports-backend.firebaseio.com")
-            .build()
+fun configureFirebase(){
+    val serviceAccount = FileInputStream("src/r-sports-backend-firebase-adminsdk-t7d2b-e1908f0145.json")
+    val options = FirebaseOptions.Builder()
+        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        .setDatabaseUrl("https://r-sports-backend.firebaseio.com")
+        .build()
 
-        FirebaseApp.initializeApp(options)
-    }
-
+    FirebaseApp.initializeApp(options)
 }
