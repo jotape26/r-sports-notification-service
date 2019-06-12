@@ -1,3 +1,5 @@
+package com.jpapps.notification
+
 import java.io.FileInputStream
 import com.google.firebase.FirebaseApp
 import com.google.auth.oauth2.GoogleCredentials

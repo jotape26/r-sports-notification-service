@@ -1,3 +1,6 @@
+package com.jpapps
+
+import com.jpapps.notification.UsersNotifications
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.receiveText
