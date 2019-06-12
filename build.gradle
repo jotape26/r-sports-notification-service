@@ -34,7 +34,7 @@ compileTestKotlin {
 
 
 apply plugin: 'application'
-mainClassName = 'com.jpapps.NotificationGateway.kt'
+mainClassName = 'com.jpapps.NotificationGatewayKt'
 task stage {
     dependsOn installDist
 }
