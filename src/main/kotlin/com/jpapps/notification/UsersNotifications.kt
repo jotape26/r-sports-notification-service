@@ -24,7 +24,7 @@ class UsersNotifications {
             var alert = ApsAlert.builder().setBody("This push is coming from Heroku and sending to firebase").setTitle("Heroku Push").build()
             var aps = Aps.builder().setAlert(alert).build()
             var apns = ApnsConfig.builder().setAps(aps).build()
-            var message = Message.builder().setApnsConfig(apns).build()
+            var message = Message.builder().setApnsConfig(apns).setToken(notificationToken).build()
             FirebaseMessaging.getInstance().send(message)
         }
 
