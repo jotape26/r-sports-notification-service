@@ -9,9 +9,9 @@ import io.ktor.server.netty.*
 fun main(args: Array<String>) {
 
     System.setProperty("Dio.netty.tryReflectionSetAccessible", "true")
-    embeddedServer(Netty, 8080) {
+    val port = System.getenv("PORT")?.toInt() ?: 8080
+    embeddedServer(Netty, port) {
         routing {
-
             get("/") {
                 call.respondText("{\"success\" : true }", ContentType.Application.Json)
             }

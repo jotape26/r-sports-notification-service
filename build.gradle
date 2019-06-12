@@ -32,5 +32,9 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
+
+apply plugin: 'application'
+mainClassName = 'com.example.kotlinserver.AppKt'
+task stage {
+    dependsOn installDist
+}
