@@ -3,6 +3,7 @@ package com.jpapps
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
+import com.google.gson.JsonParser
 import com.jpapps.notification.UsersNotifications
 import io.ktor.application.*
 import io.ktor.http.*
@@ -11,7 +12,9 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import kotlinx.coroutines.launch
 import java.io.FileInputStream
+import java.lang.Exception
 
 fun main(args: Array<String>) {
 
@@ -31,11 +34,19 @@ fun main(args: Array<String>) {
     embeddedServer(Netty, port) {
         routing {
             get("/") {
-                call.respondText("{\"success\" : true , \"method\" : \"push\"}", ContentType.Application.Json)
-            }
-            post("notifyUsers") {
                 call.respondText("{\"success\" : true }", ContentType.Application.Json)
-                UsersNotifications().notifyUsers(call.receiveText())
+            }
+            post("/notifyUsers") {
+                try {
+                    val params = JsonParser().parse(call.receiveText()).asJsonObject
+                    val documentID = params.get("documentID").asString
+                    call.respondText("{\"success\" : true , \"method\" : \"push\"}", ContentType.Application.Json)
+                    launch {
+                        UsersNotifications().notifyUsers(documentID)
+                    }
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode(400, "Error"), "No Document ID passed")
+                }
             }
         }
     }.start(wait = true)
