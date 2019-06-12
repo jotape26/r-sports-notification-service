@@ -17,20 +17,9 @@ import java.io.FileInputStream
 import java.lang.Exception
 
 fun main(args: Array<String>) {
-
     System.setProperty("Dio.netty.tryReflectionSetAccessible", "true")
 
     val port = System.getenv("PORT")?.toInt() ?: 8080
-
-    val serviceAccount = FileInputStream("src/r-sports-backend-firebase-adminsdk-t7d2b-e1908f0145.json")
-
-    val options = FirebaseOptions.Builder()
-        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-        .setDatabaseUrl("https://r-sports-backend.firebaseio.com")
-        .build()
-
-    FirebaseApp.initializeApp(options)
-
     embeddedServer(Netty, port) {
         routing {
             get("/") {
@@ -45,9 +34,21 @@ fun main(args: Array<String>) {
                         UsersNotifications().notifyUsers(documentID)
                     }
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode(400, "Error"), "No Document ID passed")
+                    val message = "{ \"success\" : false, \"message\" : \"No Document ID passed\", \"stackTrace\" : " + e.stackTrace + " }"
+                    call.respond(HttpStatusCode(400, "Error"), message)
                 }
             }
         }
     }.start(wait = true)
+
+    fun configureFirebase(){
+        val serviceAccount = FileInputStream("src/r-sports-backend-firebase-adminsdk-t7d2b-e1908f0145.json")
+        val options = FirebaseOptions.Builder()
+            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            .setDatabaseUrl("https://r-sports-backend.firebaseio.com")
+            .build()
+
+        FirebaseApp.initializeApp(options)
+    }
+
 }
