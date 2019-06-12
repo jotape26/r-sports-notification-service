@@ -34,10 +34,8 @@ fun main(args: Array<String>) {
                 call.respondText("{\"success\" : true , \"method\" : \"push\"}", ContentType.Application.Json)
             }
             post("notifyUsers") {
-                val text = call.receiveText()
                 call.respondText("{\"success\" : true }", ContentType.Application.Json)
-
-                UsersNotifications().notifyUsers()
+                UsersNotifications().notifyUsers(call.receiveText())
             }
         }
     }.start(wait = true)
