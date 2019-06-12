@@ -1,16 +1,22 @@
 package com.jpapps.notification
 
+import com.google.cloud.Timestamp
 import com.google.cloud.firestore.DocumentReference
 import com.google.firebase.cloud.FirestoreClient
 import com.google.firebase.messaging.*
+import java.text.SimpleDateFormat
 
 @Suppress("UNCHECKED_CAST")
 class UsersNotifications {
     fun notifyUsers(reservaID: String){
         val name = FirestoreClient.getFirestore().collection("reservas").document(reservaID).get().get().data
         val jogs = name?.get("jogadores") as ArrayList<Any>
+        val date = name.get("dataHora") as Timestamp
+
+        val formatter = SimpleDateFormat("dd/MM")
         val tokens = ArrayList<String>()
         var invitationName = ""
+
         jogs.forEach {
             val test = it as Map<String, Any>
             val userRef = test["user"] as DocumentReference
@@ -23,9 +29,10 @@ class UsersNotifications {
             val notificationToken = user.getString("userRegistrationToken")
             checkNotNull(notificationToken)
             tokens.add(notificationToken)
+
         }
 
-        val alert = ApsAlert.builder().setBody(invitationName.trim() + " convidou você para uma partida de futebol no dia 10/07. E ai, topa?").setTitle("Partiu jogar?").build()
+        val alert = ApsAlert.builder().setBody(invitationName.trim() + " convidou você para uma partida de futebol no dia " + formatter.format(date.toDate()) + ". E ai, topa?").setTitle("Partiu jogar?").build()
 
         val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
         FirebaseMessaging.getInstance().sendMulticast(message)
