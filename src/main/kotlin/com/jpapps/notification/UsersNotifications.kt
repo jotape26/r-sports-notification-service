@@ -25,14 +25,14 @@ class UsersNotifications {
             tokens.add(notificationToken)
         }
 
-        val alert = ApsAlert.builder().setBody(invitationName + " convidou você para uma partida de futebol no dia 10/07. E ai, topa?").setTitle("Partiu jogar?").build()
+        val alert = ApsAlert.builder().setBody(invitationName.trim() + " convidou você para uma partida de futebol no dia 10/07. E ai, topa?").setTitle("Partiu jogar?").build()
 
         val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
         FirebaseMessaging.getInstance().sendMulticast(message)
     }
 
     fun createApnsPush(alert : ApsAlert): ApnsConfig {
-        val aps = Aps.builder().setAlert(alert).build()
+        val aps = Aps.builder().setAlert(alert).setSound("default").build()
         return ApnsConfig.builder().setAps(aps).build()
     }
 }
