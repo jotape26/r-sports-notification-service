@@ -21,7 +21,6 @@ class UsersNotifications {
             checkNotNull(notificationToken)
             tokens.add(notificationToken)
 
-            var notification = Notification(, )
             var alert = ApsAlert.builder().setBody("This push is coming from Heroku and sending to firebase").setTitle("Heroku Push").build()
             var aps = Aps.builder().setAlert(alert).build()
             var apns = ApnsConfig.builder().setAps(aps).build()
