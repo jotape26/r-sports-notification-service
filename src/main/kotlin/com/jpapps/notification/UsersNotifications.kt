@@ -10,31 +10,52 @@ import kotlin.collections.ArrayList
 
 @Suppress("UNCHECKED_CAST")
 class UsersNotifications {
-    fun notifyUsers(reservaID: String){
-        val name = FirestoreClient.getFirestore().collection("reservas").document(reservaID).get().get().data
-        val jogs = name?.get("jogadores") as ArrayList<Any>
-        val date = name.get("dataHora") as Date
+    fun notifyUsers(reservaID: String) {
+        val firestore = FirestoreClient.getFirestore()
+        val reserva = firestore.collection("reservas").document(reservaID)
+        val reservaData = reserva.get().get().data
+        val jogs = reservaData?.get("jogadores") as ArrayList<Map<String, Any>>
+        val date = reservaData.get("dataHora") as Date
 
         val formatter = SimpleDateFormat("dd/MM")
         val tokens = ArrayList<String>()
-        var invitationName = ""
+        val userCreatorRef = reservaData["primeiroJogador"] as DocumentReference
+        val userCreator = userCreatorRef.get().get().data
+        val invitationName = userCreator?.get("userName") as? String
+
+        var newUserList = mutableListOf<Map<String, Any>>()
 
         jogs.forEach {
-            val test = it as Map<String, Any>
-            val userRef = test["user"] as DocumentReference
-            val user = userRef.get().get()
+            val telefone = it["telefoneTemp"] as String
 
-            val userName = user.getString("userName")
-            checkNotNull(userName)
-            invitationName = userName
+            val userData = firestore.collection("users").document(telefone).get().get()
 
-            val notificationToken = user.getString("userRegistrationToken")
-            checkNotNull(notificationToken)
-            tokens.add(notificationToken)
+            if (userData != null) {
+                newUserList.add(mapOf("statusPagamento" to false, "user" to userData.reference, "valorAPagar" to 30))
+                val notifyToken = userData.data?.get("userRegistrationToken") as? String
 
+                if (notifyToken != null) {
+                    tokens.add(notifyToken)
+                }
+            } else {
+                newUserList.add(it)
+            }
         }
 
-        val alert = ApsAlert.builder().setBody(invitationName.trim() + " convidou você para uma partida de futebol no dia " + formatter.format(date) + ". E ai, topa?").setTitle("Partiu jogar?").build()
+        if (!newUserList.isEmpty()) {
+            reserva.update("jogadores", newUserList).get()
+        }
+
+
+        var messageString = ""
+
+        if (invitationName != null) {
+            messageString = invitationName.trim() + " convidou você para uma partida de futebol no dia " + formatter.format(date) + ". E ai, topa?"
+        } else {
+            messageString = "Você recebeu um novo convite para jogar futebol, abra o aplicativo para mais detalhes!"
+        }
+
+        val alert = ApsAlert.builder().setBody(messageString).setTitle("Partiu jogar?").build()
 
         val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
         FirebaseMessaging.getInstance().sendMulticast(message)
