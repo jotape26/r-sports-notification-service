@@ -34,7 +34,7 @@ class UsersNotifications {
 
             if (userData != null) {
                 newUserList.add(mapOf("statusPagamento" to false, "user" to userData.reference, "valorAPagar" to 30))
-                val notifyToken = userData.data?.get("userRegistrationToken") as? String
+                val notifyToken = userData.data?.get("userNotificationToken") as? String
 
                 if (notifyToken != null) {
                     Logger.getGlobal().log(Level.INFO, "Adicionando Token: " + notifyToken )
