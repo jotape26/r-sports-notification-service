@@ -6,6 +6,8 @@ import com.google.firebase.cloud.FirestoreClient
 import com.google.firebase.messaging.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.logging.Level
+import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 @Suppress("UNCHECKED_CAST")
@@ -35,6 +37,7 @@ class UsersNotifications {
                 val notifyToken = userData.data?.get("userRegistrationToken") as? String
 
                 if (notifyToken != null) {
+                    Logger.getGlobal().log(Level.INFO, "Adicionando Token: " + notifyToken )
                     tokens.add(notifyToken)
                 }
             } else {
@@ -58,6 +61,9 @@ class UsersNotifications {
         val alert = ApsAlert.builder().setBody(messageString).setTitle("Partiu jogar?").build()
 
         val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
+
+
+        Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + message.toString() )
         FirebaseMessaging.getInstance().sendMulticast(message)
     }
 
