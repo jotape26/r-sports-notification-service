@@ -34,7 +34,9 @@ class UsersNotifications {
 
             if (userData != null) {
                 newUserList.add(mapOf("statusPagamento" to false, "user" to userData.reference, "valorAPagar" to 30))
-                val notifyToken = userData.data?.get("userNotificationToken") as? String
+
+                val currentUserData = userData.data as Map<String, Any>
+                val notifyToken = currentUserData["userNotificationToken"] as? String
 
                 if (notifyToken != null) {
                     Logger.getGlobal().log(Level.INFO, "Adicionando Token: " + notifyToken )
@@ -45,7 +47,7 @@ class UsersNotifications {
             }
         }
 
-        if (!newUserList.isEmpty()) {
+        if (newUserList.isNotEmpty()) {
             reserva.update("jogadores", newUserList).get()
         }
 
@@ -63,7 +65,7 @@ class UsersNotifications {
         val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
 
 
-        Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + message.toString() )
+        Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + messageString + tokens.toString() )
         FirebaseMessaging.getInstance().sendMulticast(message)
     }
 
