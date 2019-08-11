@@ -5,6 +5,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.gson.JsonParser
 import com.jpapps.notification.UsersNotifications
+import com.jpapps.reserva.ReservasProcess
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.receiveText
@@ -33,6 +34,19 @@ fun main(args: Array<String>) {
                     call.respondText("{\"success\" : true , \"method\" : \"push\"}", ContentType.Application.Json)
                     launch {
                         UsersNotifications().notifyUsers(documentID)
+                    }
+                } catch (e: Exception) {
+                    val message = "{ \"success\" : false, \"message\" : \"No Document ID passed\", \"stackTrace\" : " + e.stackTrace + " }"
+                    call.respond(HttpStatusCode(400, "Error"), message)
+                }
+            }
+            post("/processReservation") {
+                try {
+                    val params = JsonParser().parse(call.receiveText()).asJsonObject
+                    val documentID = params.get("documentID").asString
+                    call.respondText("{\"success\" : true , \"method\" : \"push\"}", ContentType.Application.Json)
+                    launch {
+                        ReservasProcess().processarReserva(documentID)
                     }
                 } catch (e: Exception) {
                     val message = "{ \"success\" : false, \"message\" : \"No Document ID passed\", \"stackTrace\" : " + e.stackTrace + " }"

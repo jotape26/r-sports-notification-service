@@ -25,17 +25,13 @@ class UsersNotifications {
         val userCreator = userCreatorRef.get().get().data
         val invitationName = userCreator?.get("userName") as? String
 
-        var newUserList = mutableListOf<Map<String, Any>>()
-
         jogs.forEach {
-            val telefone = it["telefoneTemp"] as String
+            if (it["user"] as? DocumentReference != null) {
 
-            val userData = firestore.collection("users").document(telefone).get().get()
+                val currentRef = it["user"] as DocumentReference
+                val jogadorData = currentRef.get().get()
 
-            if (userData != null) {
-                newUserList.add(mapOf("statusPagamento" to false, "user" to userData.reference, "valorAPagar" to 30))
-
-                val currentUserData = userData.data as Map<String, Any>
+                val currentUserData = jogadorData.data as Map<String, Any>
                 val notifyToken = currentUserData["userNotificationToken"] as? String
 
                 if (notifyToken != null) {
@@ -43,14 +39,9 @@ class UsersNotifications {
                     tokens.add(notifyToken)
                 }
             } else {
-                newUserList.add(it)
+                //TODO IMPLEMENT SMS FEATURE HERE
             }
         }
-
-        if (newUserList.isNotEmpty()) {
-            reserva.update("jogadores", newUserList).get()
-        }
-
 
         var messageString = ""
 
@@ -60,7 +51,7 @@ class UsersNotifications {
             messageString = "Você recebeu um novo convite para jogar futebol, abra o aplicativo para mais detalhes!"
         }
 
-        val alert = ApsAlert.builder().setBody(messageString).setTitle("Partiu jogar?").build()
+        val alert = ApsAlert.builder().setBody(messageString).setTitle("Partiu jogar?").setLaunchImage("bola-icon").build()
 
         val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
 
@@ -69,8 +60,8 @@ class UsersNotifications {
         FirebaseMessaging.getInstance().sendMulticast(message)
     }
 
-    fun createApnsPush(alert : ApsAlert): ApnsConfig {
-        val aps = Aps.builder().setAlert(alert).setSound("default").build()
+    private fun createApnsPush(alert : ApsAlert): ApnsConfig {
+        val aps = Aps.builder().setAlert(alert).setSound("default").setBadge(1).build()
         return ApnsConfig.builder().setAps(aps).build()
     }
 }
