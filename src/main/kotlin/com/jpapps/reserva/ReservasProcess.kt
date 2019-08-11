@@ -31,6 +31,8 @@ class ReservasProcess {
                 } else {
                     newUserList.add(it)
                 }
+            } else {
+                newUserList.add(it)
             }
         }
 
