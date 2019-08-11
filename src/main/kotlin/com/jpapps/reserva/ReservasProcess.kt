@@ -38,7 +38,7 @@ class ReservasProcess {
             reserva.update("jogadores", newUserList).get()
         }
 
-        UsersNotifications().notifyUsers(reservaID)
+        UsersNotifications().notifyUsersReservaCreation(reservaID)
     }
 
 

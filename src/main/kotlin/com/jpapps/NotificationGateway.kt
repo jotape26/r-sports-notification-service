@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
                     val documentID = params.get("documentID").asString
                     call.respondText("{\"success\" : true , \"method\" : \"push\"}", ContentType.Application.Json)
                     launch {
-                        UsersNotifications().notifyUsers(documentID)
+                        UsersNotifications().sendUserReminders(documentID)
                     }
                 } catch (e: Exception) {
                     val message = "{ \"success\" : false, \"message\" : \"No Document ID passed\", \"stackTrace\" : " + e.stackTrace + " }"
