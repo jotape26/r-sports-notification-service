@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
                 try {
                     val params = JsonParser().parse(call.receiveText()).asJsonObject
                     val documentID = params.get("documentID").asString
-                    call.respondText("{\"success\" : true , \"method\" : \"push\"}", ContentType.Application.Json)
+                    call.respondText("{\"success\" : true , \"method\" : \"reservation\"}", ContentType.Application.Json)
                     launch {
                         ReservasProcess().processarReserva(documentID)
                     }
