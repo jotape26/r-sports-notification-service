@@ -27,7 +27,11 @@ class ReservasProcess {
                 if (userData != null) {
                     val currentUserName = userData["userName"] as String
 
-                    var reservasList = userData["reservas"] as ArrayList<String>
+                    var reservasList = userData["reservas"] as? ArrayList<String>
+
+                    if (reservasList.isNullOrEmpty()) {
+                        reservasList = arrayListOf()
+                    }
                     reservasList.add(reservaID)
                     userRef.update("reservas", reservasList).get()
 
