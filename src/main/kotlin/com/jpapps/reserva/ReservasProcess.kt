@@ -48,7 +48,7 @@ class ReservasProcess {
                 val userData = userRef.get().get() as Map<String, Any>
                 val reservas = userData["reservas"] as ArrayList<String>
                 reservas.add(reservaID)
-                userRef.update("reservas", reservas)
+                userRef.update("reservas", reservas).get()
             }
         }
 
