@@ -53,6 +53,20 @@ fun main(args: Array<String>) {
                     call.respond(HttpStatusCode(400, "Error"), message)
                 }
             }
+            post("/registerPayment") {
+                try {
+                    val params = JsonParser().parse(call.receiveText()).asJsonObject
+                    val documentID = params.get("documentID").asString
+                    val userNumber = params.get("userPhone").asString
+                    call.respondText("{\"success\" : true , \"method\" : \"reservation\"}", ContentType.Application.Json)
+                    launch {
+                        ReservasProcess().registerPayment(documentID, userNumber)
+                    }
+                } catch (e: Exception) {
+                    val message = "{ \"success\" : false, \"message\" : \"No Document ID passed\", \"stackTrace\" : " + e.stackTrace + " }"
+                    call.respond(HttpStatusCode(400, "Error"), message)
+                }
+            }
         }
     }.start(wait = true)
 }

@@ -1,6 +1,5 @@
 package com.jpapps.notification
 
-import com.google.cloud.Timestamp
 import com.google.cloud.firestore.DocumentReference
 import com.google.firebase.cloud.FirestoreClient
 import com.google.firebase.messaging.*
@@ -98,6 +97,25 @@ class UsersNotifications {
 
         Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + messageString + tokens.toString() )
         FirebaseMessaging.getInstance().sendMulticast(message)
+    }
+
+    fun notifyPayment(reservaID: String, userPhone: String) {
+        val firestore = FirestoreClient.getFirestore()
+        val userPaying = firestore.collection("users").document(userPhone).get().get() as Map<String,Any>
+        val userPayingName = userPaying["userName"] as String
+        val reserva = firestore.collection("reservas").document(reservaID)
+        val reservaData = reserva.get().get() as MutableMap<String, Any>
+        val userCreatorRef = reservaData["primeiroJogador"] as DocumentReference
+        val userCreatorData = userCreatorRef.get().get() as MutableMap<String, Any>
+        val userCreatorToken = userCreatorData["userNotificationToken"] as String
+
+        val messageString = userPayingName.trim() + " confirmou o pagamento para a reserva #" + reservaID.take(6) + ". Acesse agora e veja os detalhes!"
+        val alert = ApsAlert.builder().setBody(messageString).setTitle("Lembrete de Partida").setLaunchImage("bola-icon").build()
+
+
+        val message = Message.builder().setApnsConfig(createApnsPush(alert)).setToken(userCreatorToken).build()
+        Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + messageString + userCreatorToken )
+        FirebaseMessaging.getInstance().send(message)
     }
 
     private fun createApnsPush(alert : ApsAlert): ApnsConfig {
