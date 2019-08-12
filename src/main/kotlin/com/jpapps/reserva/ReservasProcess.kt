@@ -45,10 +45,14 @@ class ReservasProcess {
             } else {
                 newUserList.add(it)
                 val userRef = it["user"] as DocumentReference
-                val userData = userRef.get().get() as Map<String, Any>
-                val reservas = userData["reservas"] as ArrayList<String>
-                reservas.add(reservaID)
-                userRef.update("reservas", reservas).get()
+                val userData = userRef.get().get()
+                var reservasList = userData["reservas"] as? ArrayList<String>
+
+                if (reservasList.isNullOrEmpty()) {
+                    reservasList = arrayListOf()
+                }
+                reservasList.add(reservaID)
+                userRef.update("reservas", reservasList).get()
             }
         }
 
