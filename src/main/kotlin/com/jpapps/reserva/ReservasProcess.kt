@@ -44,13 +44,17 @@ class ReservasProcess {
                 }
             } else {
                 newUserList.add(it)
+                val userRef = it["user"] as DocumentReference
+                val userData = userRef.get().get() as Map<String, Any>
+                val reservas = userData["reservas"] as ArrayList<String>
+                reservas.add(reservaID)
+                userRef.update("reservas", reservas)
             }
         }
 
         if (newUserList.isNotEmpty()) {
             reserva.update("jogadores", newUserList).get()
         }
-
         UsersNotifications().notifyUsersReservaCreation(reservaID)
     }
 
