@@ -94,8 +94,8 @@ class ReservasProcess {
         val reservaData = reserva.get().get().data
 
         if (reservaData != null) {
-            val valorPago = (reservaData["valorPago"] as Long).toDouble()
-            val valorAPagar = (reservaData["valorAPagar"] as Long).toDouble()
+            val valorPago = reservaData["valorPago"] as Double
+            val valorAPagar = reservaData["valorAPagar"] as Double
 
             if (valorAPagar == valorPago) {
                 reserva.update("status", "Pago").get()
