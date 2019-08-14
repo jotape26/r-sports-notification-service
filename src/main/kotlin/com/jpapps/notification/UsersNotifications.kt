@@ -66,42 +66,48 @@ class UsersNotifications {
         val jogs = reservaData?.get("jogadores") as ArrayList<Map<String, Any>>
         val date = reservaData.get("dataHora") as Date
 
-        val formatter = SimpleDateFormat("dd/MM")
-        val tokens = ArrayList<String>()
-        val userCreatorRef = reservaData["primeiroJogador"] as DocumentReference
-        val userCreator = userCreatorRef.get().get().data
-        val invitationName = userCreator?.get("userName") as String
+        val notifyStatus = reservaData.get("alreadyNotified") as Boolean
 
-        jogs.forEach {
-            if (it["user"] as? DocumentReference != null) {
+        if (!notifyStatus) {
+            val formatter = SimpleDateFormat("dd/MM")
+            val tokens = ArrayList<String>()
+            val userCreatorRef = reservaData["primeiroJogador"] as DocumentReference
+            val userCreator = userCreatorRef.get().get().data
+            val invitationName = userCreator?.get("userName") as String
 
-                val currentRef = it["user"] as DocumentReference
-                val jogadorData = currentRef.get().get()
+            jogs.forEach {
+                if (it["user"] as? DocumentReference != null) {
 
-                val currentUserData = jogadorData.data as Map<String, Any>
-                val currentPaymentStatus = it["statusPagamento"] as Boolean
+                    val currentRef = it["user"] as DocumentReference
+                    val jogadorData = currentRef.get().get()
+
+                    val currentUserData = jogadorData.data as Map<String, Any>
+                    val currentPaymentStatus = it["statusPagamento"] as Boolean
 
 
-                if (!currentPaymentStatus) {
-                    val notifyToken = currentUserData["userNotificationToken"] as? String
+                    if (!currentPaymentStatus) {
+                        val notifyToken = currentUserData["userNotificationToken"] as? String
 
-                    if (notifyToken != null) {
-                        Logger.getGlobal().log(Level.INFO, "Adicionando Token: " + notifyToken)
-                        tokens.add(notifyToken)
+                        if (notifyToken != null) {
+                            Logger.getGlobal().log(Level.INFO, "Adicionando Token: " + notifyToken)
+                            tokens.add(notifyToken)
+                        }
                     }
+                } else {
+                    //TODO IMPLEMENT SMS FEATURE HERE
                 }
-            } else {
-                //TODO IMPLEMENT SMS FEATURE HERE
             }
+
+            val messageString = invitationName.trim() + " ainda está te esperando para a partida no dia " + formatter.format(date) + ". Acesse agora e veja os detalhes!"
+            val alert = ApsAlert.builder().setBody(messageString).setTitle("Lembrete de Partida").setLaunchImage("bola-icon").build()
+            val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
+
+
+            Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + messageString + tokens.toString() )
+            FirebaseMessaging.getInstance().sendMulticast(message)
+
+            reserva.update("alreadyNotified", true).get()
         }
-
-        val messageString = invitationName.trim() + " ainda está te esperando para a partida no dia " + formatter.format(date) + ". Acesse agora e veja os detalhes!"
-        val alert = ApsAlert.builder().setBody(messageString).setTitle("Lembrete de Partida").setLaunchImage("bola-icon").build()
-        val message = MulticastMessage.builder().setApnsConfig(createApnsPush(alert)).addAllTokens(tokens).build()
-
-
-        Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + messageString + tokens.toString() )
-        FirebaseMessaging.getInstance().sendMulticast(message)
     }
 
     fun notifyPayment(reservaID: String, userPhone: String) {
