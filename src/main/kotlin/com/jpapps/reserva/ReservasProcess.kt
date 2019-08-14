@@ -13,7 +13,7 @@ class ReservasProcess {
         val reserva = firestore.collection("reservas").document(reservaID)
         val reservaData = reserva.get().get().data
         val jogs = reservaData?.get("jogadores") as ArrayList<Map<String, Any>>
-        val valorIndividual = reservaData["valorPago"] as Double
+        val valorIndividual = reservaData["valorPago"] as Number
 
         var newUserList = mutableListOf<Map<String, Any>>()
 
@@ -37,7 +37,7 @@ class ReservasProcess {
 
                     newUserList.add(mapOf("statusPagamento" to false,
                         "user" to userData.reference,
-                        "valorAPagar" to valorIndividual,
+                        "valorAPagar" to valorIndividual.toDouble(),
                         "userName" to currentUserName))
                 } else {
                     //TODO SMS NOTIFICATION HERE
