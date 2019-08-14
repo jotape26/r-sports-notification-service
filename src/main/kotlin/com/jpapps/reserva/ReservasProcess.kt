@@ -67,7 +67,7 @@ class ReservasProcess {
         val reserva = firestore.collection("reservas").document(reservaID)
         val reservaData = reserva.get().get().data
         val jogs = reservaData?.get("jogadores") as ArrayList<MutableMap<String, Any>>
-        val valorPago = reservaData["valorPago"] as Double
+        val valorPago = (reservaData["valorPago"] as Long).toDouble()
 
         jogs.forEach {
             val userRef = it["user"] as DocumentReference
@@ -75,7 +75,7 @@ class ReservasProcess {
                 var currentIT = it
                 currentIT["statusPagamento"] = true
 
-                val valorAPagar = currentIT["valorAPagar"] as Double
+                val valorAPagar = (currentIT["valorAPagar"] as Long).toDouble()
                 val valorTotal = valorPago + valorAPagar
 
                 reserva.update("jogadores", jogs).get()
@@ -94,8 +94,8 @@ class ReservasProcess {
         val reservaData = reserva.get().get().data
 
         if (reservaData != null) {
-            val valorPago = reservaData["valorPago"] as Double
-            val valorAPagar = reservaData["valorAPagar"] as Double
+            val valorPago = (reservaData["valorPago"] as Long).toDouble()
+            val valorAPagar = (reservaData["valorAPagar"] as Long).toDouble()
 
             if (valorAPagar == valorPago) {
                 reserva.update("status", "Pago").get()
