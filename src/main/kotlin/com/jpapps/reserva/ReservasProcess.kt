@@ -67,7 +67,7 @@ class ReservasProcess {
         val reserva = firestore.collection("reservas").document(reservaID)
         val reservaData = reserva.get().get().data
         val jogs = reservaData?.get("jogadores") as ArrayList<MutableMap<String, Any>>
-        val valorPago = reservaData["valorPago"] as Long
+        val valorPago = reservaData["valorPago"] as Double
 
         jogs.forEach {
             val userRef = it["user"] as DocumentReference
