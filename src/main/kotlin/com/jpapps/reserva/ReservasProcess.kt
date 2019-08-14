@@ -75,7 +75,7 @@ class ReservasProcess {
                 var currentIT = it
                 currentIT["statusPagamento"] = true
 
-                val valorAPagar = currentIT["valorAPagar"] as Long
+                val valorAPagar = currentIT["valorAPagar"] as Double
                 val valorTotal = valorPago + valorAPagar
 
                 reserva.update("jogadores", jogs).get()
