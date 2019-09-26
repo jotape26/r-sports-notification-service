@@ -1,5 +1,6 @@
 package com.jpapps.reserva
 
+import com.google.cloud.Timestamp
 import com.google.cloud.firestore.DocumentReference
 import com.google.firebase.cloud.FirestoreClient
 import com.jpapps.notification.UsersNotifications
@@ -30,6 +31,17 @@ class ReservasProcess {
 
             val timeRef = firestore.collection("times").document(timeID)
             val time = timeRef.get().get().data
+
+            var partidas = time?.get("partidas") as? ArrayList<Map<String, Any>>
+            if (partidas.isNullOrEmpty()) {
+                partidas = arrayListOf()
+            }
+
+            partidas.add(mapOf("reserva" to reserva,
+                "quadra" to reservaData["quadraID"] as String,
+                "data" to reservaData["dataHora"] as Timestamp))
+
+            timeRef.update("partidas", partidas).get()
 
             val jogadores = time?.get("jogadores") as ArrayList<Map<String, Any>>
 
