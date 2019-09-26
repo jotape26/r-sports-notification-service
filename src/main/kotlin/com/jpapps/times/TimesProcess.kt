@@ -48,6 +48,14 @@ class TimesProcess {
         jogadoresArr.removeIf { (it["telefone"] as String) == user }
 
         timeRef.update("jogadores", jogadoresArr).get()
+
+        val jogadorRef = firestore.collection("users").document(user)
+        val jogadorData = jogadorRef.get().get().data
+
+        val jogadorTimesTemp = jogadorData?.get("timesTemp") as ArrayList<String>
+        jogadorTimesTemp.removeIf { it == timeID }
+
+        jogadorRef.update("timeTemp", jogadorTimesTemp).get()
     }
 
     fun acceptInvite(timeID: String, user: String) {
@@ -55,8 +63,9 @@ class TimesProcess {
         val firestore = FirestoreClient.getFirestore()
         val timeRef = firestore.collection("times").document(timeID)
         val timeData = timeRef.get().get().data
+        val timeName = timeData?.get("nome") as String
 
-        val jogadoresArr = timeData?.get("jogadores") as ArrayList<Map<String,Any>>
+        val jogadoresArr = timeData["jogadores"] as ArrayList<Map<String,Any>>
 
         val index = jogadoresArr.indexOfFirst {(it["telefone"] as String) == user}
         jogadoresArr.removeAt(index)
@@ -65,12 +74,17 @@ class TimesProcess {
         val jogadorData = jogadorRef.get().get().data
         val jogadorName = jogadorData?.get("userName") as String
 
+        val jogadorTimes = jogadorData["Times"] as ArrayList<Map<String,Any>>
+
         jogadoresArr.add(index, mapOf<String, Any>("assistsNoTime" to 0,
             "golsNoTime" to 0,
             "nome" to jogadorName,
             "pendente" to false,
             "telefone" to user))
 
+        jogadorTimes.add(mapOf(timeName to timeRef.id))
+
         timeRef.update("jogadores", jogadoresArr).get()
+        jogadorRef.update("times", jogadorTimes).get()
     }
 }
