@@ -101,7 +101,7 @@ fun main(args: Array<String>) {
                     val timeID = params.get("timeID").asString
                     val user = params.get("userPhone").asString
                     launch {
-                        TimesProcess().refuseInvite(timeID, user)
+                        TimesProcess().acceptInvite(timeID, user)
                         call.respondText("{\"success\" : true , \"method\" : \"acceptInvite\"}", ContentType.Application.Json)
                     }
                 } catch (e: Exception) {
