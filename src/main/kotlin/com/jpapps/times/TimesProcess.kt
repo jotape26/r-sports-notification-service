@@ -74,7 +74,11 @@ class TimesProcess {
         val jogadorData = jogadorRef.get().get().data
         val jogadorName = jogadorData?.get("userName") as String
 
-        val jogadorTimes = jogadorData["Times"] as ArrayList<Map<String,Any>>
+        var jogadorTimes = jogadorData["times"] as? ArrayList<Map<String,Any>>
+
+        if (jogadorTimes.isNullOrEmpty()) {
+            jogadorTimes = arrayListOf()
+        }
 
         jogadoresArr.add(index, mapOf<String, Any>("assistsNoTime" to 0,
             "golsNoTime" to 0,
