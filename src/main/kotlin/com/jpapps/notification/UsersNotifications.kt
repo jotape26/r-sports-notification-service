@@ -169,6 +169,20 @@ class UsersNotifications {
         FirebaseMessaging.getInstance().sendMulticast(message)
     }
 
+    fun notifyNewTeam(userNotificationToken: String,
+                      teamID: String,
+                      teamName: String){
+
+        val messageString = "Você recebeu um convite para fazer parte do time: " + teamName + "! Acesse agora e veja os detalhes."
+
+
+        val alert = ApsAlert.builder().setBody(messageString).setTitle("Novo convite de time!").build()
+
+        val message = Message.builder().setApnsConfig(createApnsPush(alert)).setToken(userNotificationToken).putData("teamID", teamID).build()
+        Logger.getGlobal().log(Level.INFO, "FirebaseMessage: " + messageString + userNotificationToken )
+        FirebaseMessaging.getInstance().send(message)
+    }
+
     private fun createApnsPush(alert : ApsAlert): ApnsConfig {
         val aps = Aps.builder().setAlert(alert).setSound("default").setBadge(1).build()
         return ApnsConfig.builder().setAps(aps).build()

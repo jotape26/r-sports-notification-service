@@ -12,54 +12,71 @@ class ReservasProcess {
         val firestore = FirestoreClient.getFirestore()
         val reserva = firestore.collection("reservas").document(reservaID)
         val reservaData = reserva.get().get().data
-        val jogs = reservaData?.get("jogadores") as ArrayList<Map<String, Any>>
+        val criador = (reservaData?.get("primeiroJogador") as DocumentReference)
+        val criadorData = criador.get().get().data
         val valorIndividual = reservaData["valorPago"] as Number
 
-        var newUserList = mutableListOf<Map<String, Any>>()
+        if (reservaData["singlePayer"] as Boolean) {
+            var reservasList = criadorData?.get("reservas") as? ArrayList<String>
 
-        jogs.forEach {
-            if (it["user"] as? DocumentReference == null) {
-                val telefone = it["telefoneTemp"] as String
-
-                val userRef = firestore.collection("users").document(telefone)
-                val userData = userRef.get().get()
-
-                if (userData != null) {
-                    val currentUserName = userData["userName"] as String
-
-                    var reservasList = userData["reservas"] as? ArrayList<String>
-
-                    if (reservasList.isNullOrEmpty()) {
-                        reservasList = arrayListOf()
-                    }
-                    reservasList.add(reservaID)
-                    userRef.update("reservas", reservasList).get()
-
-                    newUserList.add(mapOf("statusPagamento" to false,
-                        "user" to userData.reference,
-                        "valorAPagar" to valorIndividual.toDouble(),
-                        "userName" to currentUserName))
-                } else {
-                    //TODO SMS NOTIFICATION HERE
-                }
-            } else {
-                newUserList.add(it)
-                val userRef = it["user"] as DocumentReference
-                val userData = userRef.get().get()
-                var reservasList = userData["reservas"] as? ArrayList<String>
-
-                if (reservasList.isNullOrEmpty()) {
-                    reservasList = arrayListOf()
-                }
-                reservasList.add(reservaID)
-                userRef.update("reservas", reservasList).get()
+            if (reservasList.isNullOrEmpty()) {
+                reservasList = arrayListOf()
             }
-        }
+            reservasList.add(reservaID)
+            criador.update("reservas", reservasList).get()
 
-        if (newUserList.isNotEmpty()) {
-            reserva.update("jogadores", newUserList).get()
+        } else {
+            val timeID = reservaData["timeID"] as String
+
+            val timeRef = firestore.collection("times").document(timeID)
+            val time = timeRef.get().get().data
+
+            val jogadores = time?.get("jogadores") as ArrayList<Map<String, Any>>
+
+            val newUserList = mutableListOf<Map<String, Any>>()
+
+            for (i in 0..jogadores.count()) {
+                val currentJogador = jogadores[i]
+
+                if (currentJogador["pendente"] as Boolean) {
+                    continue
+                } else {
+                    val telefone = currentJogador["telefone"] as String
+
+                    val jogadorRef = firestore.collection("users").document(telefone)
+                    val jogadorData = jogadorRef.get().get().data
+
+                    if (jogadorData != null) {
+                        val currentUserName = jogadorData["userName"] as String
+
+                        var reservasList = jogadorData["reservas"] as? ArrayList<String>
+
+                        if (reservasList.isNullOrEmpty()) {
+                            reservasList = arrayListOf()
+                        }
+                        reservasList.add(reservaID)
+                        jogadorRef.update("reservas", reservasList).get()
+
+                        if (jogadorData["telefone"] == criadorData?.get("telefone")) {
+                            newUserList.add(mapOf("statusPagamento" to true,
+                                "user" to jogadorRef,
+                                "valorAPagar" to valorIndividual.toDouble(),
+                                "userName" to currentUserName))
+                        } else {
+                            newUserList.add(mapOf("statusPagamento" to false,
+                                "user" to jogadorRef,
+                                "valorAPagar" to valorIndividual.toDouble(),
+                                "userName" to currentUserName))
+                        }
+                    }
+                }
+            }
+
+            if (newUserList.isNotEmpty()) {
+                reserva.update("jogadores", newUserList).get()
+            }
+            UsersNotifications().notifyUsersReservaCreation(reservaID)
         }
-        UsersNotifications().notifyUsersReservaCreation(reservaID)
     }
 
     fun registerPayment(reservaID: String, userPhone: String) {
