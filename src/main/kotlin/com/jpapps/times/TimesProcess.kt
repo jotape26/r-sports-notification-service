@@ -74,10 +74,12 @@ class TimesProcess {
         val jogadorData = jogadorRef.get().get().data
         val jogadorName = jogadorData?.get("userName") as String
 
-        var jogadorTimes = jogadorData["times"] as? ArrayList<Map<String,Any>>
+        var jogadorTimes = (jogadorData["times"] as? MutableMap<String,Any>)
+        val jogadorTimesTemp = jogadorData?.get("timesTemp") as ArrayList<String>
+        jogadorTimesTemp.removeIf { it == timeID }
 
         if (jogadorTimes.isNullOrEmpty()) {
-            jogadorTimes = arrayListOf()
+            jogadorTimes = mutableMapOf()
         }
 
         jogadoresArr.add(index, mapOf<String, Any>("assistsNoTime" to 0,
@@ -86,9 +88,10 @@ class TimesProcess {
             "pendente" to false,
             "telefone" to user))
 
-        jogadorTimes.add(mapOf(timeName to timeRef.id))
+        jogadorTimes.set(timeName, timeRef.id)
 
         timeRef.update("jogadores", jogadoresArr).get()
         jogadorRef.update("times", jogadorTimes).get()
+        jogadorRef.update("timesTemp", jogadorTimesTemp).get()
     }
 }

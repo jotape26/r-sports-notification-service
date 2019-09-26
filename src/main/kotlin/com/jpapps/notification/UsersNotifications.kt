@@ -1,46 +1,26 @@
 package com.jpapps.notification
 
+import com.google.cloud.Timestamp
 import com.google.cloud.firestore.DocumentReference
 import com.google.firebase.cloud.FirestoreClient
 import com.google.firebase.messaging.*
 import java.text.SimpleDateFormat
-import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 @Suppress("UNCHECKED_CAST")
 class UsersNotifications {
-    fun notifyUsersReservaCreation(reservaID: String) {
+    fun notifyUsersReservaCreation(reservaID: String, tokens: ArrayList<String>) {
         val firestore = FirestoreClient.getFirestore()
         val reserva = firestore.collection("reservas").document(reservaID)
         val reservaData = reserva.get().get().data
-        val jogs = reservaData?.get("jogadores") as ArrayList<Map<String, Any>>
-        val date = reservaData.get("dataHora") as Date
+        val date = (reservaData?.get("dataHora") as Timestamp).toDate()
 
         val formatter = SimpleDateFormat("dd/MM")
-        val tokens = ArrayList<String>()
         val userCreatorRef = reservaData["primeiroJogador"] as DocumentReference
         val userCreator = userCreatorRef.get().get().data
         val invitationName = userCreator?.get("userName") as? String
-
-        jogs.forEach {
-            if (it["user"] as? DocumentReference != null) {
-
-                val currentRef = it["user"] as DocumentReference
-                val jogadorData = currentRef.get().get()
-
-                val currentUserData = jogadorData.data as Map<String, Any>
-                val notifyToken = currentUserData["userNotificationToken"] as? String
-
-                if (notifyToken != null) {
-                    Logger.getGlobal().log(Level.INFO, "Adicionando Token: " + notifyToken )
-                    tokens.add(notifyToken)
-                }
-            } else {
-                //TODO IMPLEMENT SMS FEATURE HERE
-            }
-        }
 
         var messageString = ""
 
@@ -64,7 +44,7 @@ class UsersNotifications {
         val reserva = firestore.collection("reservas").document(reservaID)
         val reservaData = reserva.get().get().data
         val jogs = reservaData?.get("jogadores") as ArrayList<Map<String, Any>>
-        val date = reservaData.get("dataHora") as Date
+        val date = (reservaData.get("dataHora") as Timestamp).toDate()
 
         val notifyStatus = reservaData.get("alreadyNotified") as Boolean
 

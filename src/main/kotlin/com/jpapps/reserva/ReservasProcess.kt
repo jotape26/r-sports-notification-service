@@ -35,7 +35,9 @@ class ReservasProcess {
 
             val newUserList = mutableListOf<Map<String, Any>>()
 
-            for (i in 0..jogadores.count()) {
+            val notificationTokens = arrayListOf<String>()
+
+            for (i in 0 until jogadores.count()) {
                 val currentJogador = jogadores[i]
 
                 if (currentJogador["pendente"] as Boolean) {
@@ -57,7 +59,7 @@ class ReservasProcess {
                         reservasList.add(reservaID)
                         jogadorRef.update("reservas", reservasList).get()
 
-                        if (jogadorData["telefone"] == criadorData?.get("telefone")) {
+                        if (telefone == criador.id) {
                             newUserList.add(mapOf("statusPagamento" to true,
                                 "user" to jogadorRef,
                                 "valorAPagar" to valorIndividual.toDouble(),
@@ -67,6 +69,8 @@ class ReservasProcess {
                                 "user" to jogadorRef,
                                 "valorAPagar" to valorIndividual.toDouble(),
                                 "userName" to currentUserName))
+
+                            notificationTokens.add(jogadorData["userNotificationToken"] as String)
                         }
                     }
                 }
@@ -75,7 +79,7 @@ class ReservasProcess {
             if (newUserList.isNotEmpty()) {
                 reserva.update("jogadores", newUserList).get()
             }
-            UsersNotifications().notifyUsersReservaCreation(reservaID)
+            UsersNotifications().notifyUsersReservaCreation(reservaID, notificationTokens)
         }
     }
 
