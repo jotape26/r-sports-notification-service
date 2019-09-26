@@ -81,6 +81,34 @@ fun main(args: Array<String>) {
                     call.respond(HttpStatusCode(400, "Error"), message)
                 }
             }
+            post("/refuseTeamInvite") {
+                try {
+                    val params = JsonParser().parse(call.receiveText()).asJsonObject
+                    val timeID = params.get("timeID").asString
+                    val user = params.get("userPhone").asString
+                    launch {
+                        TimesProcess().refuseInvite(timeID, user)
+                        call.respondText("{\"success\" : true , \"method\" : \"refuseInvite\"}", ContentType.Application.Json)
+                    }
+                } catch (e: Exception) {
+                    val message = "{ \"success\" : false, \"message\" : \"Error, please see stacktrace\", \"stackTrace\" : " + e.stackTrace + " }"
+                    call.respond(HttpStatusCode(400, "Error"), message)
+                }
+            }
+            post("/acceptTeamInvite") {
+                try {
+                    val params = JsonParser().parse(call.receiveText()).asJsonObject
+                    val timeID = params.get("timeID").asString
+                    val user = params.get("userPhone").asString
+                    launch {
+                        TimesProcess().refuseInvite(timeID, user)
+                        call.respondText("{\"success\" : true , \"method\" : \"acceptInvite\"}", ContentType.Application.Json)
+                    }
+                } catch (e: Exception) {
+                    val message = "{ \"success\" : false, \"message\" : \"Error, please see stacktrace\", \"stackTrace\" : " + e.stackTrace + " }"
+                    call.respond(HttpStatusCode(400, "Error"), message)
+                }
+            }
         }
     }.start(wait = true)
 }

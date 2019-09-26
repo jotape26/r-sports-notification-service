@@ -37,4 +37,40 @@ class TimesProcess {
             }
         }
     }
+
+    fun refuseInvite(timeID: String, user: String) {
+
+        val firestore = FirestoreClient.getFirestore()
+        val timeRef = firestore.collection("times").document(timeID)
+        val timeData = timeRef.get().get().data
+
+        val jogadoresArr = timeData?.get("jogadores") as ArrayList<Map<String,Any>>
+        jogadoresArr.removeIf { (it["telefone"] as String) == user }
+
+        timeRef.update("jogadores", jogadoresArr).get()
+    }
+
+    fun acceptInvite(timeID: String, user: String) {
+
+        val firestore = FirestoreClient.getFirestore()
+        val timeRef = firestore.collection("times").document(timeID)
+        val timeData = timeRef.get().get().data
+
+        val jogadoresArr = timeData?.get("jogadores") as ArrayList<Map<String,Any>>
+
+        val index = jogadoresArr.indexOfFirst {(it["telefone"] as String) == user}
+        jogadoresArr.removeAt(index)
+
+        val jogadorRef = firestore.collection("users").document(user)
+        val jogadorData = jogadorRef.get().get().data
+        val jogadorName = jogadorData?.get("userName") as String
+
+        jogadoresArr.add(index, mapOf<String, Any>("assistsNoTime" to 0,
+            "golsNoTime" to 0,
+            "nome" to jogadorName,
+            "pendente" to false,
+            "telefone" to user))
+
+        timeRef.update("jogadores", jogadoresArr).get()
+    }
 }
