@@ -55,7 +55,7 @@ class TimesProcess {
         val jogadorTimesTemp = jogadorData?.get("timesTemp") as ArrayList<String>
         jogadorTimesTemp.removeIf { it == timeID }
 
-        jogadorRef.update("timeTemp", jogadorTimesTemp).get()
+        jogadorRef.update("timesTemp", jogadorTimesTemp).get()
     }
 
     fun acceptInvite(timeID: String, user: String) {
