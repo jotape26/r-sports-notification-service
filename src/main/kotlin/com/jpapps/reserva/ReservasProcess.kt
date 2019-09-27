@@ -106,20 +106,8 @@ class ReservasProcess {
                 if (checkIfFullyPaid(reserva)) {
                     if (!(reservaData["singlePayer"] as Boolean)) {
                         val timeID = reservaData["timeID"] as String
-
                         val timeRef = firestore.collection("times").document(timeID)
-                        val timeData = timeRef.get().get().data
-                        var partidas = timeData?.get("partidas") as? ArrayList<Map<String, Any>>
-
-                        if (partidas.isNullOrEmpty()) {
-                            partidas = arrayListOf()
-                        }
-
-                        partidas.add(mapOf("reserva" to reserva,
-                            "quadra" to reservaData["quadraID"] as String,
-                            "data" to reservaData["dataHora"] as Timestamp))
-
-                        timeRef.update("partidas", partidas).get()
+                        addReservaToTeam(timeRef, reserva)
                     }
 
                     UsersNotifications().notifyFullPayment(reserva)
@@ -144,6 +132,22 @@ class ReservasProcess {
             return false
         }
         return false
+    }
+
+    fun addReservaToTeam(teamRef: DocumentReference, reserva: DocumentReference) {
+        val reservaData = reserva.get().get().data
+        val timeData = teamRef.get().get().data
+        var partidas = timeData?.get("partidas") as? ArrayList<Map<String, Any>>
+
+        if (partidas.isNullOrEmpty()) {
+            partidas = arrayListOf()
+        }
+
+        partidas.add(mapOf("reserva" to reserva,
+            "quadra" to reservaData?.get("quadraID") as String,
+            "data" to reservaData["dataHora"] as Timestamp))
+
+        teamRef.update("partidas", partidas).get()
     }
 
 
