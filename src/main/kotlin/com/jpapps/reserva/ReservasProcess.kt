@@ -32,17 +32,6 @@ class ReservasProcess {
             val timeRef = firestore.collection("times").document(timeID)
             val time = timeRef.get().get().data
 
-            var partidas = time?.get("partidas") as? ArrayList<Map<String, Any>>
-            if (partidas.isNullOrEmpty()) {
-                partidas = arrayListOf()
-            }
-
-            partidas.add(mapOf("reserva" to reserva,
-                "quadra" to reservaData["quadraID"] as String,
-                "data" to reservaData["dataHora"] as Timestamp))
-
-            timeRef.update("partidas", partidas).get()
-
             val jogadores = time?.get("jogadores") as ArrayList<Map<String, Any>>
 
             val newUserList = mutableListOf<Map<String, Any>>()
@@ -115,6 +104,24 @@ class ReservasProcess {
                 reserva.update("valorPago", valorTotal).get()
 
                 if (checkIfFullyPaid(reserva)) {
+                    if (!(reservaData["singlePayer"] as Boolean)) {
+                        val timeID = reservaData["timeID"] as String
+
+                        val timeRef = firestore.collection("times").document(timeID)
+                        val timeData = timeRef.get().get().data
+                        var partidas = timeData?.get("partidas") as? ArrayList<Map<String, Any>>
+
+                        if (partidas.isNullOrEmpty()) {
+                            partidas = arrayListOf()
+                        }
+
+                        partidas.add(mapOf("reserva" to reserva,
+                            "quadra" to reservaData["quadraID"] as String,
+                            "data" to reservaData["dataHora"] as Timestamp))
+
+                        timeRef.update("partidas", partidas).get()
+                    }
+
                     UsersNotifications().notifyFullPayment(reserva)
                 } else {
                     UsersNotifications().notifyPayment(reservaID, userPhone)
